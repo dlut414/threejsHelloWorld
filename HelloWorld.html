@@ -11,8 +11,8 @@
     <script>
       
         //JS starts here
-        var width = 500;
-        var height = 500;
+        var width = window.innerWidth;
+        var height = window.innerHeight;
         
         //scene
         var scene = new THREE.Scene();
@@ -35,10 +35,15 @@
         scene.add(plane);
         
         //light
-        var light = new THREE.DirectionalLight(0xffffff, 1);
-        light.position.set(0,100,30);
-        light.castShadow = true;
-        scene.add(light);
+        var light1 = new THREE.DirectionalLight(0xffffff, 1);
+        light1.position.set(100,100,30);
+        light1.castShadow = true;
+        scene.add(light1);
+        
+        var light2 = new THREE.DirectionalLight(0xffffff, 1);
+        light2.position.set(-100,100,-30);
+        light2.castShadow = true;
+        scene.add(light2);
         
         var ambient = new THREE.AmbientLight(0x555555, 1);
         scene.add(ambient);
@@ -65,9 +70,9 @@
         
         function render(){
           requestAnimationFrame(render);
-          cube.rotation.x += 0.01*Math.PI;
-          cube.rotation.y += 0.01*Math.PI;
-          cube.rotation.z += 0.01*Math.PI;
+          //cube.rotation.x += 0.01*Math.PI;
+          //cube.rotation.y += 0.01*Math.PI;
+          //cube.rotation.z += 0.01*Math.PI;
           renderer.render(scene,camera);
           cont.update();
         }
