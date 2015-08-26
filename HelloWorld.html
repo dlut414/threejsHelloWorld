@@ -5,6 +5,17 @@
     <title>HelloWorld</title>
   </head>
   <body>
+    <form action = "">
+      <h1>select a #</h1>
+      <fieldset>
+        <select id = "selNu">
+          <option value = "0xff0000">red</option>
+          <option value = "0x00ff00">green</option>
+          <option value = "0x0000ff">blue</option>
+        </select>
+        <input type = "button" value = "reset" onclick = "getColor()"/>
+      </fieldset>
+    </form>
     <div id="stage"></div>
     <script src="../three.js-master/build/three.min.js"></script>
     <script src="../three.js-master/examples/js/controls/OrbitControls.js"></script>
@@ -26,7 +37,7 @@
         //rotate, scale
         scene.add(cube);
 
-        var pGeo = new THREE.PlaneGeometry(300,300);
+        var pGeo = new THREE.PlaneBufferGeometry(300,300);
         var pMat = new THREE.MeshLambertMaterial({color:0x555555, side:THREE.DoubleSide});
         var plane = new THREE.Mesh(pGeo, pMat);
         plane.position.set(0,0,0);
@@ -68,11 +79,17 @@
         //control
         var cont = new THREE.OrbitControls(camera, renderer.domElement);
         
+        function getColor(){
+          var selNu = document.getElementById("selNu");
+          var color = selNu.value;
+          cube.material.color.setHex(color);
+        }
         function render(){
           requestAnimationFrame(render);
           //cube.rotation.x += 0.01*Math.PI;
           //cube.rotation.y += 0.01*Math.PI;
           //cube.rotation.z += 0.01*Math.PI;
+          getColor();
           renderer.render(scene,camera);
           cont.update();
         }
